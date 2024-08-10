@@ -1,0 +1,55 @@
+                             Things to install using pip
+* pymongo\[srv\]   (if not used MongoDB previously)
+* python-dotenv
+
+                  dependencies needed for py-error or py-mongo-error
+* jupyter
+* pymongoarrow
+* pandas
+* numpy
+
+
+                          MONGO DB COMPASS
+*  Download Mongo DB compass: so you can visualize the database
+*  Now go to your database server click on your database cluster name, then click on connect, to connect the compass.
+
+
+
+                   ATLAS SEARCH
+* Click on the collection
+* then navigate to search indexes
+* create index on your collection: click on "create search index" button
+* choose a name, crosscheck to be sure of the collection then proceed
+* click on "Refine Your Index"
+* change "Index Analyzer" and "Search Analyzer" to Lucene.english.
+* click on "save changes" and "create search index" buttons
+
+
+
+                    SYNONYMS SEARCH
+* Create a collection that contains different synonyms. or bring in a pre-built database.
+* Click on "insert document"  ==>  {"mappingType": "equivalent", "synonyms": ["past", "before", "ago"]} then click "insert"
+* Add the Synonyms collection to our search index. STEPS BELOW
+* Go to our "language_search", "Edit index Definition" and chose "With JSON Editor"
+* Add field as a list called "synonyms" as seen below
+
+    "synonyms" :[    # spell correctly
+    {
+      "name": "mapping",
+      "source": {
+        "collection": "synonyms"   # collection name.
+      },
+      "analyzer": "lucene.english"  # search language
+    }
+  ]
+
+* now "save"
+
+
+                     AUTOCOMPLETE SEARCH
+* Cut synonym from "language_search", "Edit index Definition" and chose "With JSON Editor"
+* got to "language_search", "Edit index Definition" and chose "With Visual Editor"
+* Click on "Add Field / Add Field Mapping" then choose "customized configuration"
+* Select the field in your collection you want autocomplete for as "Field Name".
+* Select the data type as "Autocomplete" from "String"
+* then click on "add" then click on "save".
